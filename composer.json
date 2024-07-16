@@ -1,0 +1,12 @@
+{
+    "name": "bitkap/moala-sdk",
+    "description": "PHP-SDK Moala.",
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MoalaSDK\\": "src/"
+        }
+    }
+}
