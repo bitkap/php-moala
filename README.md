@@ -12,7 +12,7 @@ The Moala SDK for PHP enables developers to easily integrate Moala API functiona
 You can install the SDK via Composer. Add the SDK to your project using the following command:
 
 bash
-```composer require hunterbrightdesign/moala-sdk ```
+```composer require bitkap/php-moala ```
 
 ## Configuration
 To use the SDK, you need an API key and a secret key supplied by Moala. Here's how to configure and initialize the SDK:
