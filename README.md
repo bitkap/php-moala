@@ -64,7 +64,7 @@ print_r($cashout);
 Each method can raise an exception in the event of a query error. Errors are returned as an array containing the error message.
 
 # Support
-If you have any questions or problems, please open an issue in our [GitHub repository](https://github.com/username/repository](https://github.com/bitkap/php-moala/issues).
+If you have any questions or problems, please open an issue in our [GitHub repository](https://github.com/bitkap/php-moala/issues).
 
 # Contribution
 Contributions to this project are welcome. You can contribute by improving the code, documentation or reporting bugs.
