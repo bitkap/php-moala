@@ -1,6 +1,6 @@
 # Moala SDK for PHP
 
-The Moala SDK for PHP enables developers to easily integrate Moala API functionality into their PHP applications. This SDK supports several operations such as balance checks, transactions, KYC checks, and withdrawals.
+The Moala SDK for PHP enables developers to easily integrate Moala API functionality into their PHP applications. This SDK supports several operations such as balance checks, transactions checks, KYC checks, cashout, and cash-in.
 
 ## Prerequisites
 
@@ -20,12 +20,11 @@ To use the SDK, you need an API key and a secret key supplied by Moala. Here's h
 ```
 use MoalaSDK\MoalaClient;
 
-$listKey = [
-    'appKey' => 'your_app_key',
-    'secretKey' => 'your_secret_key'
-];
+$base_url = "https://api.moala.africa";
+$appKey = "cfa3a138-47c3-4f86-9fda";
+$secretKey = "cfa3a138-47c3-4f86-9fda-d4dds3434";
 
-$client = new MoalaClient($listKey);
+$client = new MoalaClient($base_url, $appKey, $secretKey);
 ```
 
 # Use
@@ -48,13 +47,13 @@ $kyc = $client->kyc($phoneNumber, $serviceCode);
 print_r($kyc);
 ```
 
-## Make a withdrawal
+## Make a cashin
 ```
-$withdrawal = $client->withdrawal($phoneNumber, $serviceCode, $amount, $partnerId);
-print_r($withdrawal);
+$cashin = $client->cashin($phoneNumber, $serviceCode, $amount, $partnerId);
+print_r($cashin);
 ```
 
-## Make a Payment
+## Make a cashout
 ```
 $cashout = $client->cashout($phoneNumber, $serviceCode, $amount, $partnerId);
 print_r($cashout);

@@ -37,23 +37,6 @@ class BaseHandle{
         ];
     }
 
-    private static $instance = null;
-    private $config;
-
-    private function __construct() {
-        $this->config = require 'config.php';
-    }
-
-    public static function getInstance() {
-        if (self::$instance == null) {
-            self::$instance = new BaseHandle();
-        }
-        return self::$instance;
-    }
-
-    public function get($key) {
-        return $this->config[$key];
-    }
 }
 
 ?>

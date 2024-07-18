@@ -7,7 +7,6 @@ $config = require 'config.php';
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use BaseHandle\BaseHandle;
-use Config\Config;
 
 class MoalaClient extends BaseHandle{
     protected $httpClient;
@@ -15,12 +14,11 @@ class MoalaClient extends BaseHandle{
     protected $secretKey;
     protected $base_uri;
 
-    public function __construct($listKey)
+    public function __construct(string $base_url, string $appKey, string $secretKey)
     {
-        $config = Config::getInstance();
-        $this->base_uri = $config->get('base_api_url');
-        $this->appKey = $listKey['appKey'];
-        $this->secretKey = $listKey['secretKey'];
+        $this->base_uri = $base_url;
+        $this->appKey = $appKey;
+        $this->secretKey = $secretKey;
         $this->httpClient = new Client([
             'base_uri' => $this->base_uri
         ]);
@@ -68,7 +66,7 @@ class MoalaClient extends BaseHandle{
         }
     }
 
-    public function kyc($phoneNumber, $serviceCode)
+    public function kyc(string $phoneNumber, string $serviceCode)
     {
         try {
             $LACCESS_SIGN = $this->generateHmacSha256Hex(time()."GET/v1/api/kyc/".$serviceCode."/".$phoneNumber, $this->secretKey );
@@ -89,7 +87,7 @@ class MoalaClient extends BaseHandle{
         }
     }
 
-    public function cashout($phoneNumber, $serviceCode, $amount, $partnerId)
+    public function cashout(string $phoneNumber, string $serviceCode, int $amount, $partnerId)
     {
         try {
             $data   = ["amount"=>$amount,"transactionType" => "deposit","serviceCode"=>$serviceCode,"phoneNumber"=>$phoneNumber,"partnerId"=>$partnerId];
@@ -113,7 +111,7 @@ class MoalaClient extends BaseHandle{
         }
     }
 
-    public function withdrawal($phoneNumber, $serviceCode, $amount, $partnerId)
+    public function cashin(string $phoneNumber, string $serviceCode, int $amount, $partnerId)
     {
         try {
             $data = ["amount"=>$amount,"transactionType" => "withdrawal","serviceCode"=>$serviceCode,"phoneNumber"=>$phoneNumber,"partnerId"=>$partnerId];
