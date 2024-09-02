@@ -27,13 +27,15 @@ class MoalaClient extends BaseHandle{
     public function balance()
     {
         try {
-            $LACCESS_SIGN = $this->generateHmacSha256Hex(time()."GET/v1/api/balance", $this->secretKey );
+            $TIMESTAMP = time();
+
+            $LACCESS_SIGN = $this->generateHmacSha256Hex($TIMESTAMP."GET/v1/api/balance", $this->secretKey );
             $response = $this->httpClient->get('v1/api/balance', [
                 'headers' => [
                     'LP-ACCESS-SIGN' => $LACCESS_SIGN,
                     'LP-ACCESS-KEY' => $this->appKey ,
                     'Content-Type' => 'application/json',
-                    'LP-ACCESS-TIMESTAMP' => ''.time(),
+                    'LP-ACCESS-TIMESTAMP' => ''.$TIMESTAMP,
                 ],
             ]);
 
@@ -48,13 +50,15 @@ class MoalaClient extends BaseHandle{
     public function checkTransaction($partnerId)
     {
         try {
-            $LACCESS_SIGN = $this->generateHmacSha256Hex(time()."GET/v1/api/transaction/check/".$partnerId, $this->secretKey );
+            $TIMESTAMP = time();
+
+            $LACCESS_SIGN = $this->generateHmacSha256Hex($TIMESTAMP."GET/v1/api/transaction/check/".$partnerId, $this->secretKey );
             $response = $this->httpClient->get('/v1/api/transaction/check/'.$partnerId, [
                 'headers' => [
                     'LP-ACCESS-SIGN' => $LACCESS_SIGN,
                     'LP-ACCESS-KEY' => $this->appKey ,
                     'Content-Type' => 'application/json',
-                    'LP-ACCESS-TIMESTAMP' => ''.time(),
+                    'LP-ACCESS-TIMESTAMP' => ''.$TIMESTAMP,
                 ],
             ]);
 
@@ -69,13 +73,15 @@ class MoalaClient extends BaseHandle{
     public function kyc(string $phoneNumber, string $serviceCode)
     {
         try {
-            $LACCESS_SIGN = $this->generateHmacSha256Hex(time()."GET/v1/api/kyc/".$serviceCode."/".$phoneNumber, $this->secretKey );
+            $TIMESTAMP = time();
+
+            $LACCESS_SIGN = $this->generateHmacSha256Hex($TIMESTAMP."GET/v1/api/kyc/".$serviceCode."/".$phoneNumber, $this->secretKey );
             $response = $this->httpClient->get('/v1/api/kyc/'.$serviceCode."/".$phoneNumber, [
                 'headers' => [
                     'LP-ACCESS-SIGN' => $LACCESS_SIGN,
                     'LP-ACCESS-KEY' => $this->appKey ,
                     'Content-Type' => 'application/json',
-                    'LP-ACCESS-TIMESTAMP' => ''.time(),
+                    'LP-ACCESS-TIMESTAMP' => ''.$TIMESTAMP,
                 ],
             ]);
 
@@ -90,15 +96,17 @@ class MoalaClient extends BaseHandle{
     public function cashout(string $phoneNumber, string $serviceCode, int $amount, $partnerId)
     {
         try {
+            $TIMESTAMP = time();
+
             $data   = ["amount"=>$amount,"transactionType" => "deposit","serviceCode"=>$serviceCode,"phoneNumber"=>$phoneNumber,"partnerId"=>$partnerId];
-            $LACCESS_SIGN = $this->generateHmacSha256Hex(time()."POST/v1/api/transaction/payment".json_encode($data), $this->secretKey ); 
+            $LACCESS_SIGN = $this->generateHmacSha256Hex($TIMESTAMP."POST/v1/api/transaction/payment".json_encode($data), $this->secretKey ); 
 
             $response = $this->httpClient->post('/v1/api/transaction/payment', [
                 'headers' => [
                     'LP-ACCESS-SIGN' => $LACCESS_SIGN,
                     'LP-ACCESS-KEY' => $this->appKey ,
                     'Content-Type' => 'application/json',
-                    'LP-ACCESS-TIMESTAMP' => ''.time(),
+                    'LP-ACCESS-TIMESTAMP' => ''.$TIMESTAMP,
                 ],
                 'json' => $data 
             ]);
@@ -114,15 +122,17 @@ class MoalaClient extends BaseHandle{
     public function cashin(string $phoneNumber, string $serviceCode, int $amount, $partnerId)
     {
         try {
+            $TIMESTAMP = time();
+
             $data = ["amount"=>$amount,"transactionType" => "withdrawal","serviceCode"=>$serviceCode,"phoneNumber"=>$phoneNumber,"partnerId"=>$partnerId];
-            $LACCESS_SIGN = $this->generateHmacSha256Hex(time()."POST/v1/api/transaction/withdrawal".json_encode($data), $this->secretKey ); 
+            $LACCESS_SIGN = $this->generateHmacSha256Hex($TIMESTAMP."POST/v1/api/transaction/withdrawal".json_encode($data), $this->secretKey ); 
 
             $response = $this->httpClient->post('/v1/api/transaction/withdrawal', [
                 'headers' => [
                     'LP-ACCESS-SIGN' => $LACCESS_SIGN,
                     'LP-ACCESS-KEY' => $this->appKey ,
                     'Content-Type' => 'application/json',
-                    'LP-ACCESS-TIMESTAMP' => ''.time(),
+                    'LP-ACCESS-TIMESTAMP' => ''.$TIMESTAMP,
                 ],
                 'json' => $data 
             ]);
