@@ -2,11 +2,11 @@
 
 namespace MoalaSDK;
 
-$config = require 'config.php';
+// $config = require 'config.php';
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use BaseHandle\BaseHandle;
+use MoalaSDK\BaseHandle;
 
 class MoalaClient extends BaseHandle{
     protected $httpClient;

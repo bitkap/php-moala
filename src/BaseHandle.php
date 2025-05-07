@@ -1,5 +1,5 @@
 <?php
-namespace baseHandle;
+namespace MoalaSDK;
 
 class BaseHandle{
     function generateHmacSha256Hex($data, $key) {
